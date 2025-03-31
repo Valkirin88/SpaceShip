@@ -1,18 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
+    public event Action OnAccelerate;
+    public event Action OnAccelerateFinished;
+
     [SerializeField]
     private Rigidbody2D _rockerRigidbody;
     [SerializeField]
     private int _speed;
+    [SerializeField]
+    private ParticleSystem _flameParticle;
+
+    private float _particlesSpeed;
+
+    private bool _isPushed;
+
+    private void Start()
+    {
+        _particlesSpeed = _flameParticle.startSpeed;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _isPushed = true;
+        }
+    }
     private void FixedUpdate()
     {
-        if(Input.GetMouseButtonDown(0)) 
+        if (_isPushed)
         {
+            OnAccelerate?.Invoke();
             _rockerRigidbody.AddForce(Vector2.up * _speed);
+
+            _isPushed = false;
         }
+        else
+            OnAccelerateFinished?.Invoke();
+
+
     }
 }
