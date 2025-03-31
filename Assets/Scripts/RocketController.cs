@@ -5,6 +5,7 @@ public class RocketController : MonoBehaviour
 {
     public event Action OnAccelerate;
     public event Action OnAccelerateFinished;
+    public event Action<Transform> OnCrashed;
 
     [SerializeField]
     private Rigidbody2D _rockerRigidbody;
@@ -22,12 +23,20 @@ public class RocketController : MonoBehaviour
         _particlesSpeed = _flameParticle.startSpeed;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.GetComponent<Obstacle>())
+        {
+            OnCrashed?.Invoke(transform);
+        }
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             _isPushed = true;
         }
+        Debug.Log(_rockerRigidbody.velocity);
     }
     private void FixedUpdate()
     {
@@ -40,7 +49,5 @@ public class RocketController : MonoBehaviour
         }
         else
             OnAccelerateFinished?.Invoke();
-
-
     }
 }

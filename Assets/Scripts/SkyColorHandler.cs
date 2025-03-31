@@ -26,7 +26,6 @@ public class SkyColorHandler : MonoBehaviour
         _distance = Vector2.Distance(_rocketTransform.position, _groundTransform.position);
 
         float distanceClamped = Mathf.Clamp01(_distance/_maxDistance);
-        Debug.Log(distanceClamped);
 
         Color color = Color.Lerp(_blueSkyColor, _spaceColor, distanceClamped);
 
