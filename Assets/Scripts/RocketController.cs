@@ -25,7 +25,8 @@ public class RocketController : IDisposable
     }
     private void Accelerate()
     {
-        _rocketView.RocketRigidbody.AddForce(Vector2.up * _rocketView.Speed);
+
+        _rocketView.RocketRigidbody.AddForce(_rocketView.transform.TransformDirection(Vector3.up) * _rocketView.Speed);
         _rocketFlame.ShowFlame();
     }
 

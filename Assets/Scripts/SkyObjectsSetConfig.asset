@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: SkyObjectsSetConfig
   m_EditorClassIdentifier: 
   _skyObjects:
-  - {fileID: 8344393555073087003, guid: 86143c12fa95ec64f8713e30fc466c38, type: 3}
+  - {fileID: 2245099388454617032, guid: 41561aa503927354a91087846d067440, type: 3}
+  - {fileID: 2245099388454617032, guid: c8bb82e7efbe0db479863bdd1c2cb03e, type: 3}
+  - {fileID: 2245099388454617032, guid: c0875e17b52ea564a84d1b7359f65321, type: 3}
+  - {fileID: 2245099388454617032, guid: d65478aa7b9bf224991a37cdc9149eed, type: 3}
+  - {fileID: 2245099388454617032, guid: b85baff998ba5354eacfedc1e5a84bc4, type: 3}
