@@ -467,7 +467,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3565752175535280805, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
   m_PrefabInstance: {fileID: 1299365218}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1904475765}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc905e7330690b64fafdf860e4377646, type: 3}
@@ -507,8 +507,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2541bbc92204c4ba2f553be3cf4b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rocketObject: {fileID: 1904475765}
+  _skyObjectsConfigs: {fileID: 11400000, guid: d02415ce47b517c4aa1171da1d6d27b1, type: 2}
   _rocketController: {fileID: 781280553}
   _rocketFlame: {fileID: 38865636}
+  _groundObject: {fileID: 1500755095}
 --- !u!4 &905535291
 Transform:
   m_ObjectHideFlags: 0
@@ -648,7 +651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7135555390066020405, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7392574401886016552, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -707,6 +710,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 38865635}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8082669272806153398, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904475768}
     - targetCorrespondingSourceObject: {fileID: 7135555390066020405, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1400898741}
@@ -764,7 +770,7 @@ GameObject:
   - component: {fileID: 1500755096}
   - component: {fileID: 1500755099}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,8 +882,8 @@ Transform:
   m_GameObject: {fileID: 1500755095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0009, y: -8.15, z: 0}
-  m_LocalScale: {x: 5.045451, y: 6.611032, z: 0.93813}
+  m_LocalPosition: {x: -0.4643, y: -8.15, z: 0}
+  m_LocalScale: {x: 30.587818, y: 6.611032, z: 0.93813}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5766,6 +5772,46 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1904475765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8082669272806153398, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
+  m_PrefabInstance: {fileID: 1299365218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1904475768
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904475765}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 0.5, y: 1.08}
+  m_Direction: 0
 --- !u!224 &2844442740742039093
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5825,7 +5871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7568628, g: 0.9176471, b: 0.9607844, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5848,8 +5894,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 920651133}
+  - {fileID: 905535291}
   - {fileID: 1500755098}
   - {fileID: 1299365218}
   - {fileID: 497080292}
   - {fileID: 40692286}
-  - {fileID: 905535291}
