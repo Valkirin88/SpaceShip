@@ -32,6 +32,8 @@ public class RocketFlame : MonoBehaviour
     {
         if (_flameParticle.startSpeed > 0)
             _flameParticle.startSpeed = _flameParticle.startSpeed - 0.2f;
+        else
+            _flameParticle.Stop();
     }
 
     private void OnDestroy()
