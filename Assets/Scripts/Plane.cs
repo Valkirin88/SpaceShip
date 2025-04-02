@@ -8,6 +8,6 @@ public class Plane : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.down * Time.deltaTime * 3);
+        transform.Translate(Vector3.down * Time.deltaTime );
     }
 }

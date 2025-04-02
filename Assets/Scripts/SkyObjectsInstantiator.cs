@@ -44,14 +44,14 @@ public class SkyObjectsInstantiator
 
     private Vector3 GetInstantiatePosition()
     {
-        int rangeChoice = Random.Range(0, 2);
-        if (rangeChoice == 0)
-            _posX = Random.Range(4.5f, 6);
-        else
-            _posX = Random.Range(-6, -4.5f);
+        //int rangeChoice = Random.Range(0, 2);
+        //if (rangeChoice == 0)
+        //    _posX = Random.Range(4.5f, 6);
+        //else
+        //    _posX = Random.Range(-6, -4.5f);
 
-
-            _posY = Random.Range(7, 12);
+            _posX = Random.Range(-6, 2f);
+        _posY = Random.Range(8, 13);
 
         Vector3 position = new Vector3(_rocketTransform.position.x + _posX, _rocketTransform.position.y + _posY, _rocketTransform.position.z);
         return position;
