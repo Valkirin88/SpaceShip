@@ -131,7 +131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38865635}
-  - component: {fileID: 38865636}
   m_Layer: 0
   m_Name: Flame particles
   m_TagString: Untagged
@@ -155,19 +154,6 @@ Transform:
   - {fileID: 1737038107}
   m_Father: {fileID: 781280556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &38865636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38865634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 333b5c599a3986c408fab86fe98f275f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flameParticle: {fileID: 1737038109}
 --- !u!1 &40692283
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,17 +448,6 @@ MonoBehaviour:
   _rocketTransform: {fileID: 781280556}
   _blueSkyColor: {r: 0.75800997, g: 0.9181138, b: 0.9622642, a: 1}
   _spaceColor: {r: 0.022948582, g: 0.015218934, b: 0.16981131, a: 1}
---- !u!114 &781280553 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3565752175535280805, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
-  m_PrefabInstance: {fileID: 1299365218}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904475765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc905e7330690b64fafdf860e4377646, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &781280556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7392574401886016552, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
@@ -509,8 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rocketObject: {fileID: 1904475765}
   _skyObjectsConfigs: {fileID: 11400000, guid: d02415ce47b517c4aa1171da1d6d27b1, type: 2}
-  _rocketController: {fileID: 781280553}
-  _rocketFlame: {fileID: 38865636}
+  _rocketView: {fileID: 1904475769}
   _groundObject: {fileID: 1500755095}
 --- !u!4 &905535291
 Transform:
@@ -701,7 +675,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3565752175535280805, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8801127594230449763, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
     - {fileID: 7799166151982194895, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
@@ -713,6 +688,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8082669272806153398, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1904475768}
+    - targetCorrespondingSourceObject: {fileID: 8082669272806153398, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904475769}
     - targetCorrespondingSourceObject: {fileID: 7135555390066020405, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1400898741}
@@ -5812,6 +5790,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.1}
   m_Size: {x: 0.5, y: 1.08}
   m_Direction: 0
+--- !u!114 &1904475769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904475765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eed0e3b441510c4380f9dcae5633ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RocketRigidbody: {fileID: 1904475771}
+  FlameParticle: {fileID: 1737038109}
+  Speed: 120
+--- !u!50 &1904475771 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1173434110284716206, guid: 944274b60d90a204db2e3c42c75a5f76, type: 3}
+  m_PrefabInstance: {fileID: 1299365218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2844442740742039093
 RectTransform:
   m_ObjectHideFlags: 0

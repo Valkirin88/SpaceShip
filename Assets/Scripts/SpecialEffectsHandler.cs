@@ -1,17 +1,17 @@
 using System;
 using UnityEngine;
 
-public class SpecialEffectsHandler : MonoBehaviour
+public class SpecialEffectsHandler : IDisposable
 {
 
     private ParticleSystem _explosionParticles;
 
-    private RocketController _rocketController;
+    private RocketView _rocketView;
 
-    public void Initialize(RocketController rocketController)
+    public SpecialEffectsHandler(RocketView rocketView)
     {
-        _rocketController = rocketController;
-        _rocketController.OnCrashed += ShowCrash;
+        _rocketView = rocketView;
+        _rocketView.OnCrashed += ShowCrash;
     }
 
     private void ShowCrash(Transform crashPosition)
@@ -20,9 +20,9 @@ public class SpecialEffectsHandler : MonoBehaviour
         _explosionParticles.Play();
     }
 
-    public void OnDestroy()
+    public void Dispose()
     {
-        _rocketController.OnCrashed -= ShowCrash;
+        _rocketView.OnCrashed -= ShowCrash;
     }
 
 }

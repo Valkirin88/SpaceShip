@@ -1,42 +1,32 @@
 using UnityEngine;
 
-public class RocketFlame : MonoBehaviour
+public class RocketFlame 
 {
-    [SerializeField]
-    private ParticleSystem _flameParticle;
+    private readonly RocketView _rocketView;
 
-    private RocketController _rocketController;
+
+    private RocketView _rocketController;
     private float _particlesSpeed;
 
 
-    public void Initialize(RocketController rocketController)
+    public RocketFlame(RocketView rocketView)
     {
-        _rocketController = rocketController;
-
-        _rocketController.OnAccelerate += ShowFlame;
-        _rocketController.OnAccelerateFinished += HideFlame;
-
-        _particlesSpeed = _flameParticle.startSpeed;
+        _rocketView = rocketView;
+        _particlesSpeed = _rocketView.FlameParticle.startSpeed;
     }
 
-
-
-    private void ShowFlame()
+    public void ShowFlame()
     {
-        if (_flameParticle.startSpeed < _particlesSpeed)
-            _flameParticle.startSpeed = _flameParticle.startSpeed + 2f;
-        _flameParticle.Play();
+        if (_rocketView.FlameParticle.startSpeed < _particlesSpeed)
+            _rocketView.FlameParticle.startSpeed = _rocketView.FlameParticle.startSpeed + 2f;
+        _rocketView.FlameParticle.Play();
     }
 
-    private void HideFlame()
+    public void HideFlame()
     {
-        if (_flameParticle.startSpeed > 0)
-            _flameParticle.startSpeed = _flameParticle.startSpeed - 0.2f;
-    }
-
-    private void OnDestroy()
-    {
-        _rocketController.OnAccelerate -= ShowFlame;
-        _rocketController.OnAccelerateFinished -= HideFlame;
+        if (_rocketView.FlameParticle.startSpeed > 0)
+            _rocketView.FlameParticle.startSpeed = _rocketView.FlameParticle.startSpeed - 0.2f;
+        else
+            _rocketView.FlameParticle.Stop();
     }
 }

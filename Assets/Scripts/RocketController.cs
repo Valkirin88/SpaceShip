@@ -1,53 +1,41 @@
 using System;
 using UnityEngine;
 
-public class RocketController : MonoBehaviour
+public class RocketController : IDisposable
 {
-    public event Action OnAccelerate;
-    public event Action OnAccelerateFinished;
-    public event Action<Transform> OnCrashed;
+    private InputHandler _inputHandler;
 
-    [SerializeField]
-    private Rigidbody2D _rockerRigidbody;
-    [SerializeField]
-    private int _speed;
-    [SerializeField]
-    private ParticleSystem _flameParticle;
+    private RocketView _rocketView;
+
+    private RocketFlame _rocketFlame;
 
     private float _particlesSpeed;
 
     private bool _isPushed;
 
-    private void Start()
+    public RocketController(InputHandler inputHandler, RocketView rocketView)
     {
-        _particlesSpeed = _flameParticle.startSpeed;
+        _inputHandler = inputHandler;
+        _rocketView = rocketView;
+
+        _inputHandler.OnAccelerate += Accelerate;
+        _inputHandler.OnAccelerateFinished += StopAccelerate;
+
+        _rocketFlame = new RocketFlame(_rocketView);
+    }
+    private void Accelerate()
+    {
+        _rocketView.RocketRigidbody.AddForce(Vector2.up * _rocketView.Speed);
+        _rocketFlame.ShowFlame();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void StopAccelerate()
     {
-        if(collision.gameObject.GetComponent<Obstacle>())
-        {
-            OnCrashed?.Invoke(transform);
-        }
+        _rocketFlame.HideFlame();
     }
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _isPushed = true;
-        }
-        Debug.Log(_rockerRigidbody.velocity);
-    }
-    private void FixedUpdate()
-    {
-        if (_isPushed)
-        {
-            OnAccelerate?.Invoke();
-            _rockerRigidbody.AddForce(Vector2.up * _speed);
 
-            _isPushed = false;
-        }
-        else
-            OnAccelerateFinished?.Invoke();
+    public void Dispose()
+    {
+        _inputHandler.OnAccelerate -= Accelerate;
     }
 }
