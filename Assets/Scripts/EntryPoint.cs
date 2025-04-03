@@ -10,6 +10,9 @@ public class EntryPoint : MonoBehaviour
 
     [SerializeField]
     private RocketView _rocketView;
+
+    [SerializeField]
+    private LaunchZone _launchZone;
     
 
     [SerializeField]
@@ -25,7 +28,7 @@ public class EntryPoint : MonoBehaviour
     {
         _inputHandler = new InputHandler();
         _rocketController = new RocketController(_inputHandler, _rocketView);
-        _specialEffectsHandler = new SpecialEffectsHandler(_rocketView);
+        _specialEffectsHandler = new SpecialEffectsHandler(_rocketController, _launchZone);
         _heightMeasurer = new HeightMeasurer(_groundObject, _rocketObject);
         _skyObjectsInstantiator = new SkyObjectsInstantiator(_rocketObject.transform, _skyObjectsConfigs, _heightMeasurer);
     }

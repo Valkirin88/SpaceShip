@@ -5,24 +5,44 @@ public class SpecialEffectsHandler : IDisposable
 {
 
     private ParticleSystem _explosionParticles;
+    private ParticleSystem _launchParticles;
 
-    private RocketView _rocketView;
+    private RocketController _rocketController;
 
-    public SpecialEffectsHandler(RocketView rocketView)
+    public SpecialEffectsHandler(RocketController rocketController)
     {
-        _rocketView = rocketView;
-        _rocketView.OnCrashed += ShowCrash;
+        _rocketController = rocketController;
+        _rocketController.OnCrashed += ShowCrash;
+        _rocketController.OnLaunch += ShowLaunchEffect;
     }
 
-    private void ShowCrash(Transform crashPosition)
+    private void ShowCrash(Transform crashPosition, ParticleSystem explosionParticles)
     {
+        _explosionParticles = explosionParticles;
         _explosionParticles.transform.position = crashPosition.position;
-        _explosionParticles.Play();
+        _explosionParticles.gameObject.SetActive(true);
+    }
+
+    private void ShowLaunchEffect(Transform launchTransform, ParticleSystem launchParticles, bool IsInLaunch)
+    {
+        _launchParticles = launchParticles;
+        if (IsInLaunch) 
+        {
+
+            _launchParticles.gameObject.transform.SetParent(null);
+            _launchParticles.gameObject.SetActive(true);
+        }
+        else
+        {
+
+            var position = launchTransform.position;
+            _launchParticles.gameObject.transform.position = position;
+        }    
     }
 
     public void Dispose()
     {
-        _rocketView.OnCrashed -= ShowCrash;
+        _rocketController.OnCrashed -= ShowCrash;
     }
 
 }

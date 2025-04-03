@@ -5,7 +5,7 @@ public class RocketFlame
     private readonly RocketView _rocketView;
 
 
-    private RocketView _rocketController;
+    private RocketController _rocketController;
     private float _particlesSpeed;
 
 
