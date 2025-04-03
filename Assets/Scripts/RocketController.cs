@@ -13,23 +13,32 @@ public class RocketController : MonoBehaviour
     private int _speed;
     [SerializeField]
     private ParticleSystem _flameParticle;
+    [SerializeField]
+    private GameObject _starsParticlesObject;
+    [SerializeField]
+    private GameObject _launchDustParticlesObject;
 
     private float _particlesSpeed;
 
     private bool _isPushed;
+
+    private float _starsTime;
 
     private void Start()
     {
         _particlesSpeed = _flameParticle.startSpeed;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.GetComponent<Obstacle>())
+        if (collision.gameObject.GetComponent<Plane>())
         {
             OnCrashed?.Invoke(transform);
+            _starsParticlesObject.SetActive(true);
+            _starsTime = 0;
         }
     }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -37,6 +46,11 @@ public class RocketController : MonoBehaviour
             _isPushed = true;
         }
         Debug.Log(_rockerRigidbody.velocity);
+        _starsTime += Time.deltaTime;
+        if(_starsTime >5)
+        {
+            _starsParticlesObject.SetActive(false);
+        }
     }
     private void FixedUpdate()
     {
@@ -44,6 +58,7 @@ public class RocketController : MonoBehaviour
         {
             OnAccelerate?.Invoke();
             _rockerRigidbody.AddForce(Vector2.up * _speed);
+            _launchDustParticlesObject.SetActive(true);
 
             _isPushed = false;
         }
