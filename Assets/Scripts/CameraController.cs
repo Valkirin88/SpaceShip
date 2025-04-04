@@ -29,6 +29,17 @@ public class CameraController : MonoBehaviour
             float targetY = _rocketTransform.position.y + 2;
             _camera.transform.position = new Vector3(_camera.transform.position.x, targetY, _camera.transform.position.z);
         }
+
+        if (_camera.transform.position.x - _rocketTransform.position.x > 1)
+        {
+            float targetX = _rocketTransform.position.x + 1;
+            _camera.transform.position = new Vector3(targetX, _camera.transform.position.y, _camera.transform.position.z);
+        }
+        if (_camera.transform.position.x - _rocketTransform.position.x < -1)
+        {
+            float targetX = _rocketTransform.position.x -1;
+            _camera.transform.position = new Vector3(targetX, _camera.transform.position.y, _camera.transform.position.z);
+        }
     }
 
     private void CameraFollowUp()
