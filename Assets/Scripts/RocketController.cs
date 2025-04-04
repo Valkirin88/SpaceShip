@@ -32,6 +32,7 @@ public class RocketController : MonoBehaviour
     private float _volume;
 
     private Vector2 _direction;
+    private Vector3 _currentRotation;
 
     private void Start()
     {
@@ -67,11 +68,25 @@ public class RocketController : MonoBehaviour
     {
          _direction.x = Input.acceleration.x;
          _direction.y = Input.acceleration.y;
+
+        float targetAngleZ = Mathf.Atan2(_direction.x, _direction.y) * Mathf.Rad2Deg;
+        Vector3 targetRotation = new Vector3(0, 0, -targetAngleZ); // Инвертируем Z, если нужно
+
+        // Плавный поворот или мгновенный
+
+            _currentRotation = Vector3.Lerp(_currentRotation, targetRotation, Time.deltaTime);
+
+            _currentRotation = targetRotation;
+
+
+        // Применяем поворот к объекту
+        transform.rotation = Quaternion.Euler(_currentRotation);
+
         _direction.Normalize();
         if (_isPushed)
         {
             OnAccelerate?.Invoke();
-            _rockerRigidbody.AddForce(Vector2.up * _speed);
+            _rockerRigidbody.AddForce(transform.TransformDirection(Vector3.up * _speed));
             _launchDustParticlesObject.SetActive(true);
             if (!_isSoundPlaying)
             {
